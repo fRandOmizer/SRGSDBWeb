@@ -1,0 +1,34 @@
+<grammars>
+    <grammar>
+        <rule id="name">
+            <one-of>
+                <item>Maros</item>
+                <item>Richard</item>
+                <item>Svetlana</item>
+                <item>Tomas</item>
+            </one-of> 
+        </rule>
+       <rule id="gender">
+            <one-of>
+                <item>male</item>
+                <item>female</item>
+            </one-of> 
+        </rule>
+    </grammar>
+    <grammar>
+        <rule id="city">
+            <one-of>
+                <item>Bratislava</item>
+                <item>Brno</item>
+                <item>Kosice</item>
+                <item>Praha</item>
+            </one-of> 
+        </rule>
+       <rule id="state">
+            <one-of>
+                <item>Slovakia</item>
+                <item>Czech Republic</item>
+            </one-of> 
+        </rule>
+    </grammar>
+</grammars>
