@@ -24,33 +24,16 @@ import javax.servlet.http.HttpServletResponse;
 public class ListServlet extends HttpServlet {
 
     public static final String URL_MAPPING = "/list";
-    private static final String LIST_JSP = "/list.jsp";
+    private static final String LIST_JSP = "/grammarList.jsp";
     
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
+            GrammarManager gm = new GrammarManager("ourXMLDatabse.xml");
+            gm.loadGrammarsFromXML();
             
-            List<Grammar> grammarList = new ArrayList<Grammar>();
-
-            
-            Grammar testGrammar = new Grammar("gramatika c1");
-            testGrammar.addRule(new Rule("left side"));
-            
-            Grammar testGrammar2 = new Grammar("gramatika c2");
-            testGrammar2.addRule(new Rule("left side"));
-            
-            Grammar testGrammar3 = new Grammar("gramatika c3");
-            testGrammar3.addRule(new Rule("left side"));
-            
-            
-            grammarList.add(testGrammar);
-            grammarList.add(testGrammar2);
-            grammarList.add(testGrammar3);
-            
-
-            request.setAttribute("grammarList", grammarList);
-
+            request.setAttribute("grammarList", gm.getGrammars());
             request.getRequestDispatcher(LIST_JSP).forward(request, response);
         } catch (ServletException | IOException e) {
             //log.log(Level.SEVERE, "Error cannot show cellars", e);

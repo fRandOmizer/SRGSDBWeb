@@ -14,26 +14,30 @@ import java.util.List;
  */
 public class Rule {
     
-    private String left;
-    private List<String> right = new ArrayList<String>();
+    private String nonterminal;
+    private List<String> terminals = new ArrayList<String>();
 
-    public Rule(String left) {
-        this.left = left;
-        //testm data
-        right.add("asd");
-        right.add("qwe");
-        right.add("zxc");
+    public Rule(String nonterminal, String[] terminals) {
+        this.nonterminal = nonterminal;
+        for(String terminal : terminals){
+            this.terminals.add(terminal);
+        }
+    }
+
+    public void addTerminals(String[] terminals) {
+        for (String terminal : terminals) {
+            if(this.terminals.contains(terminal) ){
+                return;
+            }
+            this.terminals.add(terminal);
+        }
+    }
+
+    public String getNonterminal(){
+        return nonterminal;
     }
     
-    public String getLeft(){
-        return left;
+    public String[] getTerminals(){
+        return terminals.toArray(new String[terminals.size()]);
     }
-    
-    public String getRight(){
-        return right.toString();
-    }
-    
-    
-         
-    
 }

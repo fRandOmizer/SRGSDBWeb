@@ -20,9 +20,11 @@
                 ${grammar.getName()}
                 <c:forEach items="${grammar.getRules()}" var="rule">
                     <div>
-                        ${rule.getLeft()}
+                        ${rule.getNonterminal()}
                         -->
-                        ${rule.getRight()}
+                        <c:forEach items="${rule.getTerminals()}" var="terminal">
+                             ${terminal}
+                        </c:forEach>
                     </div>
                 </c:forEach>
             </div>
