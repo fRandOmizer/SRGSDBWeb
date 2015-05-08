@@ -1,37 +1,56 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.mycompany.pb138.java.maven;
-
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/*
+ * GrammarManager
  *
- * @author Tomas
+ * Manages grammars - can load grammars in SRGS format from XML file,
+ * can edit grammars and then save then back to XML file.
  */
 public class GrammarManager {
     
     private List<Grammar> grammars = new ArrayList<Grammar>();
     private String xmlFile;
 
+    /**
+     * GrammarManager constructor
+     * 
+     * @param xmlFile name of the file where grammars are stored in
+     */
     public GrammarManager(String xmlFile) {  
         this.xmlFile = xmlFile;
     }
    
+    /**
+     * Gets all the grammars in a new List<Grammar>
+     * 
+     * @return all grammars
+     */
     public List<Grammar> getGrammars(){
         return new ArrayList(grammars);
     }
     
+    /**
+     * Adds a grammar to the manager 
+     * 
+     * @param newGrammar New grammar to add
+     */
     public void addGrammar(Grammar newGrammar){
         grammars.add(newGrammar);
     }
     
-    public void addRuleToGrammar(Grammar g, Rule r){
-        if(grammars.contains(g) ){
-            g.addRule(r);
+    /**
+     * Adds a rule to the grammar.
+     * 
+     * If grammar does not exist in the manager, fires IllegalArgumentException.
+     * 
+     * @param grammar New grammar to add
+     * @param rule New rule to add
+     */
+    public void addRuleToGrammar(Grammar grammar, Rule rule){
+        if(grammars.contains(grammar) ){
+            grammar.addRule(rule);
         }
         else
         {
@@ -39,15 +58,36 @@ public class GrammarManager {
         }
     }
     
-    public void findGrammarByRootRule(){
+    /**
+     * Returns a grammar with required rootRule
+     * 
+     * If such a grammar does not exist in the manager, fires IllegalArgumentException.
+     * 
+     * @param rule New rule to add
+     */
+    public Grammar findGrammarByRootRule(Rule rootRule){
         //TODO
+       throw new IllegalArgumentException("Grammar does not exist in database.");
     }
     
+    /**
+     * Loads grammars from XML file, specified in constructor
+     */
     public void loadGrammarsFromXML(){
         //TODO
         createTestData();
     }
     
+    /**
+     * Saves grammars to XML file, specified in constructor
+     */
+    public void saveGrammarsToXML(){
+        //TODO
+    }
+    
+    /**
+     * TEST DATA - TEMPORARY
+     */
     public void createTestData(){
 
         Grammar grammar1 = new Grammar("Test Grammar #1");
