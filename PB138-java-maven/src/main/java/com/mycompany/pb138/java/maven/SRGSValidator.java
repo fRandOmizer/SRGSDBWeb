@@ -1,4 +1,4 @@
-package com.mycompany.pb138.java.maven;
+package testznack2;
 
 import java.io.File;
 import java.io.IOException;
@@ -26,8 +26,11 @@ public class SRGSValidator {
     private Validator validator; //validator object
     private String ex; //exception text if file is not valid
     
+    /**
+     * Sets schemas for validator.
+     * Needs files: grammar.xsd, grammar-core.xsd and xml.xsd.
+     */
     public SRGSValidator() {
-    
     
             SchemaFactory factory = SchemaFactory.newInstance( "http://www.w3.org/2001/XMLSchema");
              File XSDFile = new File("grammar.xsd");
@@ -42,25 +45,27 @@ public class SRGSValidator {
     }
     
     /**
+     * Validates InputStream given. If it is not valid, sets validator's
+     * exception text to reason.
      * 
      * @param InputStream in file to be validated
-     * @return true if file is valid SRGDv1.0 file
+     * @return true if file is valid SRGSv1.0 file
      */
         public boolean validate(InputStream in) {
             Source source = new StreamSource(in);
             try {
                 validator.validate(source);
-                System.out.println( " validates.");
+                System.out.println( "Input validates.");
                 return true;
             }
             catch (SAXParseException e) {
-                System.out.println(" fails to validate because: \n");
+                System.out.println("Input fails to validate because: \n");
                 System.out.println(e.toString());
                 ex = e.toString();
                 return false;
             }
             catch (SAXException e) {
-                System.out.println(" fails to validate because: \n");
+                System.out.println("Input fails to validate because: \n");
                 System.out.println(e.getMessage());
                 ex = e.getMessage();
                 return false;
@@ -71,6 +76,15 @@ public class SRGSValidator {
                 return false;
             }
 
-    }   
+    } 
+
+        /**
+         * 
+         * @return Text of exception in validation.
+         */
+        
+        public String getValidationError () {
+            return ex;
+        }
     
 }
