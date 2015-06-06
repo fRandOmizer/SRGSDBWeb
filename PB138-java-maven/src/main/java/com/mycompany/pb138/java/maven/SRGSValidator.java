@@ -40,7 +40,7 @@ public class SRGSValidator {
             validator = schema.newValidator();
 
         } catch (SAXException e) {
-            System.err.println("Error reading XML Schema: ");
+            System.err.println("Error reading XML Schema: " + e.getMessage());
         }
     }
     
