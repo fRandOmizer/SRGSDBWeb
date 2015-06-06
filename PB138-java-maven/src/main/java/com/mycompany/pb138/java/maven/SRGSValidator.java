@@ -1,4 +1,4 @@
-package testznack2;
+package com.mycompany.pb138.java.maven;
 
 import java.io.File;
 import java.io.IOException;
