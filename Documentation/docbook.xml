@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<article xml:lang="cs" xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xi="http://www.w3.org/2001/XInclude" xmlns:xl="http://www.w3.org/1999/xlink">
+	<info>		
+		<title>Databáze SRGS gramatik s webovým rozhraním</title>
+	</info>
+	<section>
+		<title>Zadanie</title>
+		<para>
+			Studenti navrhnou a implementují webovou aplikaci, která bude umožnovat správu gramatik ve formátu SRGS a bude přístupná pomocí webového rozhraní a REST API. Data budou uložena v nativní XML databázi. Aplikace bude umožňovat:
+		</para>
+		<itemizedlist>
+			<listitem> přídání gramatiky, </listitem>
+			<listitem> vyhledání gramatiky podle kořenového pravidla, </listitem>
+			<listitem> přídání pravidla do gramatiky. </listitem>
+		</itemizedlist>	
+	</section>
+	<section>
+		<title>Teória</title>
+		<section>
+			<title>XML databáza</title>
+			<itemizedlist>
+				<listitem><ulink url="http://exist-db.org/exist/apps/doc/devguide_xmldb.xml">Návod 1</ulink></listitem>
+				<listitem><ulink url="http://cdi.uvm.edu/exist/devguide_xmldb.xml">Návod 2</ulink></listitem>
+			</itemizedlist>
+		</section>
+		<section>
+			<title>XML gramatika</title>
+			<itemizedlist>
+				<listitem><ulink url="http://www.w3.org/Voice/">Špecifikácia</ulink></listitem>
+				<listitem><ulink url="http://www.w3.org/TR/speech-grammar/">Teória</ulink></listitem>
+				<listitem><ulink url="http://en.wikipedia.org/wiki/Speech_Recognition_Grammar_Specification">Teória - Wikipédia</ulink></listitem>
+				<listitem><ulink url="https://msdn.microsoft.com/en-us/library/office/hh361653(v=office.14).aspx">Jednotlivé elementy gramatiky</ulink></listitem>	
+			</itemizedlist>
+		</section>
+		<section>
+			<title>REST API</title>
+			<itemizedlist>
+				<listitem><ulink url="http://en.wikipedia.org/wiki/Java_API_for_RESTful_Web_Services">Wikipédia</ulink></listitem>
+				<listitem><ulink url="http://rest.elkstein.org/2008/02/using-rest-in-java.html">Tutoriál</ulink></listitem>
+				<listitem><ulink url="http://crunchify.com/how-to-build-restful-service-with-java-using-jax-rs-and-jersey/">Tutoriál + Konfigurácia</ulink></listitem>	
+			</itemizedlist>
+		</section>
+		
+	</section>
+	
+	
+	<section>
+		<title>UML diagramy</title>
+		
+		<section>
+			<title>Use Case diagram</title>
+			<mediaobject>
+ 				<imageobject>
+    				<imagedata width="50%" height="50%" format="PNG" align="center" fileref="C:/Users/Sharksyk/workspace/SRGS/images/SRGSUseCase.jpg"/>
+  				</imageobject>
+			</mediaobject>
+		</section>
+		
+		<section>
+			<title>Class diagram</title>
+			<mediaobject>
+ 				<imageobject>
+    				<imagedata width="50%" height="50%" format="PNG" align="center" fileref="C:/Users/Sharksyk/workspace/SRGS/images/SRGSclass.jpg"/>
+  				</imageobject>
+			</mediaobject>
+		</section>
+		
+	</section>
+	
+	<section>
+		<title>Riešitelia</title>
+		<itemizedlist>
+			<listitem>Bc. Richard Záň, učo 396380 @fRandOmizer</listitem>
+			<listitem>Tomáš Oravec, učo 410329 @xOravec4</listitem>
+			<listitem>Svetlana Viktória Stuchlá, učo 409977 @svvi</listitem>
+			<listitem>Maroš Surový, učo 409849 @Sharksyk</listitem>
+		</itemizedlist>
+	
+	
+		<section>
+			<title>Role</title>
+			<itemizedlist>
+				<listitem>Web + Rest API : Tomáš, Maroš</listitem>
+				<listitem>XML databáza + SRGS : Svetlana, Richard</listitem>
+				<listitem>Organizácia : Richard</listitem>
+				<listitem>Dokumentácia : Maroš, Richard</listitem>
+			</itemizedlist>
+		</section>
+	</section>
+	
+	<section>
+		<title>Linky</title>
+		<itemizedlist>
+			<listitem><ulink url="https://github.com/fRandOmizer/SRGSDBWeb">Github</ulink></listitem>
+			<listitem><ulink url="https://www.facebook.com/groups/818604184890799/">FB skupina</ulink></listitem>
+			<listitem><ulink url="https://trello.com/b/KjSXauQa/pb138-project">Trello</ulink></listitem>
+		</itemizedlist>
+	</section>
+	
+	
+	<section>
+		<title>Dokumentace</title>
+		
+		<section>
+			<title>Servlets</title>
+			<section>
+				<title>ListServlet</title>
+				<para>Shows list of grammars and allows user to filter grammar by root rule or add rule do already existing grammar.</para>
+				<itemizedlist>
+					<listitem>@requestParameter grammars ListXmlList - containing required grammars</listitem>
+					<listitem>@requestParameter success String  - indicates successful operation</listitem>
+					<listitem>@requestParameter error String - indicates not successful operation</listitem>
+					<listitem>@requestParameter id String - unique grammar id - name</listitem>
+					<listitem>@requestParameter rule String - rule to add to a grammar</listitem>
+					<listitem>@requestParameter searchValue String - root rule for searching</listitem>
+					<listitem>@requestParameter rule String - rule to add to a grammar</listitem>
+					<listitem>@requestParameter fileName String - name of the file to download</listitem>
+					<listitem>@jsp /grammarList.jsp </listitem>
+				</itemizedlist>
+			</section>
+			<section>
+				<title>addGrammarServlet</title>
+				<para>Allows users to upload new grammar.</para>
+				<itemizedlist>
+					<listitem>@requestParameter file to upload</listitem>
+					<listitem>@requestParameter success String which indicates successful operation</listitem>
+					<listitem>@requestParameter error String which indicates not successful operation</listitem>
+					<listitem>@jsp /addGrammar.jsp </listitem>
+				</itemizedlist>
+			</section>
+		</section>
+		
+		<section>
+			<title>Database Manager</title>
+			
+			
+			<section>
+				<title>DatabaseManager</title>
+				<para>Constructor, initialization of Database</para>
+			</section>
+			
+			<section>
+				<title>void addGrammar(InputStream in, String fileName)</title>
+				<para>Add grammar to database</para>
+				<itemizedlist>
+					<listitem>@param in InputStream of the file</listitem>
+					<listitem>@param fileName Name of the file</listitem>
+				</itemizedlist>
+			</section>
+			
+			<section>
+				<title>List findByRoot(String rootId)</title>
+				<para>Execute XQuery on database to find files that have desired root id</para>
+				<itemizedlist>
+					<listitem>@param rootId name of the root rule in grammar</listitem>
+					<listitem>@return list of files where given root exist</listitem>
+				</itemizedlist>
+			</section>
+			
+			<section>
+				<title>List getAllGrammar()</title>
+				<para>Find all grammars with their rootId by XQuery</para>
+				<itemizedlist>
+					<listitem>@return list of files with root id</listitem>
+				</itemizedlist>
+			</section>
+			
+			<section>
+				<title>void CloseManager()</title>
+				<para>Close database and connection</para>
+			</section>
+			
+			<section>
+				<title>File getXmlFileByName(String name)</title>
+				<para>Returns required XML file</para>
+				<itemizedlist>
+					<listitem>@param name name of the file</listitem>
+					<listitem>@return File file</listitem>
+				</itemizedlist>
+			</section>
+			
+			<section>
+				<title>void addRuleToGrammar(String id, String strRule)</title>
+				<para>Add rule to given XML</para>
+				<itemizedlist>
+					<listitem>@param id root name</listitem>
+					<listitem>@param strRule rule to add to file</listitem>
+					<listitem>@throws AddRuleException</listitem>
+					<listitem>@throws IllegalArgumentException </listitem>
+				</itemizedlist>
+			</section>
+			
+			<section>
+				<title>Document convertStringToDocument(String xmlStr)</title>
+				<para>Converts String to Document format (needed in addRuleToGrammar)</para>
+				<itemizedlist>
+					<listitem>@param xmlStr xml string to convert</listitem>
+					<listitem>@return Document xml document</listitem>
+				</itemizedlist>
+			</section>
+			
+			
+			
+			
+			
+		</section>
+			
+		<section>
+			<title>SRGSValidator</title>
+		
+			<section>
+				<title>SRGSValidator()</title>
+				<para>Class constructor</para>
+			</section>
+		
+			<section>
+				<title>boolean validate(InputStream in)</title>
+				<para>Check if file is in valid SRGDv1.0 format</para>
+				<itemizedlist>
+					<listitem>@param InputStream in file to be validated</listitem>
+					<listitem>@return true if file is valid SRGDv1.0 file</listitem>
+				</itemizedlist>
+			</section>
+		
+		
+		</section>
+		
+		
+	</section>
+	
+</article>
