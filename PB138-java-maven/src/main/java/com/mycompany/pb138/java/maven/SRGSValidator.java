@@ -75,7 +75,7 @@ public class SRGSValidator {
 
     }  
         
-        public void setSyntaxError (String err) {
+        private void setSyntaxError (String err) {
             this.syntaxErorr = err;
         }
         

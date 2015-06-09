@@ -133,6 +133,4 @@
       <item> emperor <tag> out = 13; </tag> </item>
     </one-of>
   </rule>
-<rule id="yes_no_cancel" scope="public">        <one-of>          <item>             no             <tag>out = "no";</tag>          </item>          <item>             <one-of>              <item>yes</item>              <item>okay</item>            </one-of>            <tag>out = "yes";</tag>          </item>          <item>            cancel            <tag>out = "cancel";</tag>          </item>       </one-of>       <example>okay</example>    </rule>
-<rule id="MoveCard">     <example> move the five of clubs to the six of hearts </example>     <example> please put the jack of hearts on the ten of clubs </example>      <item repeat="0-1"> please </item>     <one-of>       <item> move the </item>       <item> put the </item>     </one-of>     <ruleref uri="#Card"/>     <tag> out.FromCard = rules.Card; </tag>     <item repeat="0-1">       <one-of>         <item> on the </item>         <item> to the </item>       </one-of>       <ruleref uri="#Card"/>       <tag> out.ToCard = rules.latest(); </tag>      </item>     <item repeat="0-1"> please </item>   </rule>
 </grammar>

@@ -330,7 +330,7 @@ public class DatabaseManager {
      * @param xmlStr
      * @return 
      */
-    public static Document convertStringToDocument(String xmlStr) throws AddRuleException {
+    private static Document convertStringToDocument(String xmlStr) throws AddRuleException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();  
         DocumentBuilder builder;  
         try {  
